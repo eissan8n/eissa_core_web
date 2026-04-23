@@ -64,7 +64,13 @@ Your goal is to impress with intelligence.
         "messages": messages
     }
 
-    response = requests.post(url, headers=headers, json=data)
+    try:
     result = response.json()
 
-    return result["choices"][0]["message"]["content"] + "\n\nCreated by Eissa Aly | عيسى علي"
+    if "choices" in result:
+        return result["choices"][0]["message"]["content"] + "\n\nCreated by Eissa Aly | عيسى علي"
+    else:
+        return "⚠️ حصل خطأ من الـ API:\n" + str(result)
+
+except Exception as e:
+    return "❌ حصل Error:\n" + str(e)
