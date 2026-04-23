@@ -2,6 +2,17 @@ import requests
 from flask import Flask, render_template, request
 import json
 
+
+def load_memory():
+    try:
+        with open("memory.json", "r") as f:
+            return json.load(f)
+    except:
+        return {"users": {}}
+
+def save_memory(data):
+    with open("memory.json", "w") as f:
+        json.dump(data, f, indent=2)
 app = Flask(__name__)
 
 def load_brain():
