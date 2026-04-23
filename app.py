@@ -1,3 +1,4 @@
+import requests
 from flask import Flask, render_template, request
 import json
 
@@ -17,13 +18,28 @@ def detect_complexity(text):
     return "complex"
 
 def think(user_input):
-    brain = load_brain()
-    mode = detect_complexity(user_input)
+    API_KEY = "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"
 
-    if mode == "simple":
-        return f"{user_input}\n\n(Quick Answer)\n\nCreated by Eissa Aly | عيسى علي"
-    else:
-        return f"{brain}\n\nUser Request:\n{user_input}\n\nFinal Answer:\n(Deep intelligent response here)\n\nCreated by Eissa Aly | عيسى علي"
+    url = "https://openrouter.ai/api/v1/chat/completions"
+
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    data = {
+        "model": "openai/gpt-3.5-turbo",
+        "messages": [
+            {"role": "system", "content": "You are Eissa Core AI. Be smart and helpful."},
+            {"role": "user", "content": user_input}
+        ]
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+
+    result = response.json()
+
+    return result["choices"][0]["message"]["content"] + "\n\nCreated by Eissa Aly | عيسى علي""
 
 @app.route("/", methods=["GET", "POST"])
 def index():
