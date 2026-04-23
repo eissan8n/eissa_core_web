@@ -1,19 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>Eissa Core AI</title>
+
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            font-family: Arial;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #00ffcc;
+            color: black;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #00ffcc;
+        }
+
+        .response {
+            margin-top: 30px;
+            font-size: 18px;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h1>{{ title }}</h1>
+    <h1>Eissa Core AI</h1>
 
     <form method="post">
-        <input type="text" name="user_input" placeholder="Type your request..." required>
+        <input type="text" name="user_input" placeholder="Talk to Eissa..." required>
+        <br><br>
         <button type="submit">Send</button>
     </form>
 
-    <h3>Response:</h3>
-    <p>{{ response }}</p>
+    <div class="response">
+        {{ response }}
+    </div>
 
 </body>
 </html>
